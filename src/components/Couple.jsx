@@ -19,20 +19,7 @@ const Couple = () => {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
-    // Auto-sparkle effect on mobile
-    useEffect(() => {
-        if (isMobile) {
-            const interval = setInterval(() => {
-                setGroomHovered(true);
-                setTimeout(() => setGroomHovered(false), 2000);
-                setTimeout(() => {
-                    setBrideHovered(true);
-                    setTimeout(() => setBrideHovered(false), 2000);
-                }, 2500);
-            }, 6000);
-            return () => clearInterval(interval);
-        }
-    }, [isMobile]);
+    // Removed auto-sparkle for better performance
 
     const handleGroomInteraction = () => {
         if (isMobile) {
@@ -50,18 +37,8 @@ const Couple = () => {
 
     return (
         <section className="py-12 bg-white relative overflow-hidden">
-            {/* Animated background glow */}
-            <motion.div
-                className="absolute inset-0 opacity-10"
-                animate={{
-                    background: [
-                        'radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.3) 0%, transparent 50%)',
-                        'radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.3) 0%, transparent 50%)',
-                        'radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.3) 0%, transparent 50%)',
-                    ]
-                }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
+            {/* Static background glow for better performance */}
+            <div className="absolute inset-0 opacity-10 bg-gradient-radial from-gold-400/30 to-transparent" />
 
             <div className="absolute inset-0 opacity-5 border-y-2 border-gold-400 m-4 pointer-events-none"></div>
 
@@ -73,13 +50,9 @@ const Couple = () => {
                     viewport={{ once: true }}
                     className="mb-8"
                 >
-                    <motion.p
-                        className="text-gray-500 mb-4 font-serif italic text-lg"
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    >
+                    <p className="text-gray-500 mb-4 font-serif italic text-lg">
                         of their son
-                    </motion.p>
+                    </p>
                     <div
                         className="relative inline-block"
                         onMouseEnter={() => !isMobile && setGroomHovered(true)}
@@ -121,37 +94,17 @@ const Couple = () => {
                             </motion.div>
                         )}
                     </div>
-                    <motion.span
-                        className="text-xl md:text-2xl font-serif text-gray-700 block mt-2"
-                        animate={{ opacity: [0.7, 1, 0.7] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    >
+                    <span className="text-xl md:text-2xl font-serif text-gray-700 block mt-2">
                         (Rahil)
-                    </motion.span>
+                    </span>
                     <p className="text-base text-gray-500 mt-2 font-serif tracking-wide">M.Tech (Canada)</p>
                 </motion.div>
 
-                <motion.div
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 0.2, duration: 0.5 }}
-                    viewport={{ once: true }}
-                    animate={{
-                        rotate: [0, 360],
-                        boxShadow: [
-                            '0 0 20px rgba(212, 175, 55, 0.5)',
-                            '0 0 40px rgba(212, 175, 55, 0.8)',
-                            '0 0 20px rgba(212, 175, 55, 0.5)',
-                        ]
-                    }}
-                    transition={{
-                        rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                        boxShadow: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-                    }}
+                <div
                     className="w-16 h-16 mx-auto my-6 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full flex items-center justify-center text-white font-serif text-2xl shadow-lg"
                 >
                     &
-                </motion.div>
+                </div>
 
                 <motion.div
                     initial={{ x: 30, opacity: 0 }}
@@ -202,13 +155,9 @@ const Couple = () => {
                         )}
                     </div>
                     <p className="text-base text-gray-500 mt-2 font-serif tracking-wide">B.Tech</p>
-                    <motion.p
-                        className="text-gray-500 mt-6 font-serif italic text-lg"
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    >
+                    <p className="text-gray-500 mt-6 font-serif italic text-lg">
                         D/o Mr. Mohammed Sadiq Sahab
-                    </motion.p>
+                    </p>
                 </motion.div>
             </div>
         </section>

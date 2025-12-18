@@ -73,6 +73,7 @@ function App() {
         className="fixed top-0 left-0 w-32 sm:w-40 md:w-72 pointer-events-none z-20 md:opacity-40 md:mix-blend-multiply md:z-0"
       />
 
+
       {/* Floating Rose Petals */}
       <FloatingPetals />
 
