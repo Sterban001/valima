@@ -7,31 +7,34 @@ const MusicPlayer = () => {
         const playMusic = () => {
             if (audioRef.current) {
                 audioRef.current.play().catch(error => {
-                    console.log("Audio play failed (browser restriction):", error);
+                    console.log("Music autoplay prevented:", error);
                 });
             }
         };
 
         const handleInteraction = () => {
             playMusic();
-            // Remove listeners after first successful interaction trigger
+            // Remove event listeners after first successful interaction
             document.removeEventListener('click', handleInteraction);
-            document.removeEventListener('scroll', handleInteraction); // Optional: play on scroll too
+            document.removeEventListener('touchstart', handleInteraction);
+            document.removeEventListener('scroll', handleInteraction);
         };
 
-        // Add listeners to common interaction events
+        // Listen for any user interaction
         document.addEventListener('click', handleInteraction);
+        document.addEventListener('touchstart', handleInteraction);
         document.addEventListener('scroll', handleInteraction);
 
         return () => {
             document.removeEventListener('click', handleInteraction);
+            document.removeEventListener('touchstart', handleInteraction);
             document.removeEventListener('scroll', handleInteraction);
         };
     }, []);
 
     return (
-        <audio ref={audioRef} loop hidden>
-            <source src="/music.mp3" type="audio/mp3" />
+        <audio ref={audioRef} loop preload="auto">
+            <source src="/music.mp3" type="audio/mpeg" />
         </audio>
     );
 };
