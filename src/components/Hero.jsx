@@ -118,7 +118,7 @@ const Hero = () => {
                         }}
                         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                     >
-                        Mohammed Waheed Ali
+                        Mohammed Wahed Ali
                     </motion.h1>
                     <motion.p
                         className="text-lg md:text-xl text-gray-600 font-serif italic text-pretty max-w-xl mx-auto"
